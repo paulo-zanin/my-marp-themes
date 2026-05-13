@@ -25,11 +25,11 @@
     
     /* -- Colors -- */
     /* Primary, and variations */
-    --primary:          #608534;
-    --saturation-multiplier: .5;
-    --desaturation-multiplier: 1.25;
-    --brightness-multiplier: 1.12;
-    --darkness-multiplier: 1.1;
+    --primary:          #00A459;
+    --saturation-multiplier: .6;
+    --desaturation-multiplier: .25;
+    --brightness-multiplier: 1.4;
+    --darkness-multiplier: 1;
     --color-shift-degrees: 120;
     
     /* Font configuration */
