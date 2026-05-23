@@ -11,15 +11,17 @@
   --secondary: #141414;
 
   /* === Variáveis de tabela (traduzidas do neobeamifg) === */
-  --table-header-bg: hsl(from var(--main) h s calc(l + 12%));   /* cabeçalho: verde mais claro */
-  --table-header-text: #ffffff;                                  /* texto do cabeçalho */
-  --table-text: #141414;                                         /* texto das células */
-  --table-border-outer: hsl(from var(--main) h calc(s - 20%) calc(l - 15%)); /* borda externa */
-  --table-border-inner: #e0e0e0;                                 /* linhas divisórias internas */
-  --table-row-alt: hsl(from var(--main) h calc(s - 50%) 96%);    /* zebrado: verde quase branco */
-  --table-bg: #ffffff;                                           /* fundo do bloco da tabela */
-  --table-radius: 0.5em;                                         /* cantos arredondados */
-  --table-padding: 0.4em;                                        /* respiro interno */
+  /* Valores fixos derivados do --main #4d9b59, p/ compatibilidade total */
+  --table-header-bg: #5fb06d;     /* cabeçalho: verde mais claro que o --main */
+  --table-header-text: #ffffff;   /* texto do cabeçalho */
+  --table-text: #141414;          /* texto das células */
+  --table-border-outer: #357a40;  /* borda externa: verde mais escuro */
+  --table-border-inner: #e0e0e0;  /* linhas divisórias internas */
+  --table-row-alt: #f1f7f2;       /* zebrado: verde quase branco */
+  --table-bg: #ffffff;            /* fundo do bloco da tabela */
+  --table-radius: 0.5em;          /* cantos arredondados */
+  --table-padding: 0.4em;         /* respiro interno */
+  --table-max-height: 70vh;       /* altura máx. antes de habilitar scroll */
 }
 
 section {
@@ -146,7 +148,9 @@ table {
   width: fit-content;
   max-width: 90%;
   margin: 0.5em 0;
-  overflow: hidden;           /* faz o arredondamento "cortar" os cantos das células */
+  display: block;                   /* necessário p/ overflow funcionar em <table> */
+  max-height: var(--table-max-height);
+  overflow: auto;                   /* permite deslizar quando a tabela é grande */
 }
 
 table tr td,
@@ -181,6 +185,9 @@ table th {
   color: var(--table-header-text);
   border-bottom-width: 0.25em;
   text-align: left;
+  position: sticky;   /* mantém o cabeçalho visível ao deslizar */
+  top: 0;
+  z-index: 1;
 }
 
 /* zebrado: linhas ímpares com fundo suave */
