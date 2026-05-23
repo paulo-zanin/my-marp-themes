@@ -9,6 +9,17 @@
   font-family: "CMU Sans Serif", "Segoe UI", Helvetica, sans-serif;
   --main: #4d9b59;
   --secondary: #141414;
+
+  /* === Variáveis de tabela (traduzidas do neobeamifg) === */
+  --table-header-bg: hsl(from var(--main) h s calc(l + 12%));   /* cabeçalho: verde mais claro */
+  --table-header-text: #ffffff;                                  /* texto do cabeçalho */
+  --table-text: #141414;                                         /* texto das células */
+  --table-border-outer: hsl(from var(--main) h calc(s - 20%) calc(l - 15%)); /* borda externa */
+  --table-border-inner: #e0e0e0;                                 /* linhas divisórias internas */
+  --table-row-alt: hsl(from var(--main) h calc(s - 50%) 96%);    /* zebrado: verde quase branco */
+  --table-bg: #ffffff;                                           /* fundo do bloco da tabela */
+  --table-radius: 0.5em;                                         /* cantos arredondados */
+  --table-padding: 0.4em;                                        /* respiro interno */
 }
 
 section {
@@ -98,7 +109,7 @@ mark {
   background-color: #f5db7e;
 }
 
-/* formatting page numbers  */
+/* formatting page numbers */
 section::after {
   font-size: 0.6em;
   /* https://github.com/yhatt/marp/issues/263 */
@@ -122,6 +133,59 @@ section::after {
 img[alt~="center"] {
   display: block;
   margin: 0 auto;
+}
+
+/* || TABELAS (portado do neobeamifg) */
+table {
+  color: var(--table-text);
+  background-color: var(--table-bg);
+  border: solid 0.1em var(--table-border-outer);
+  border-radius: var(--table-radius);
+  border-spacing: 0;          /* remove o espaçamento padrão entre células */
+  padding: 0;
+  width: fit-content;
+  max-width: 90%;
+  margin: 0.5em 0;
+  overflow: hidden;           /* faz o arredondamento "cortar" os cantos das células */
+}
+
+table tr td,
+table th {
+  padding: calc(0.5 * var(--table-padding)) var(--table-padding);
+  border-right: solid 0.1em var(--table-border-inner);
+  border-bottom: solid 0.1em var(--table-border-inner);
+}
+
+/* última linha sem borda inferior */
+table tr:last-child td {
+  border-bottom: none;
+}
+
+/* última coluna sem borda à direita */
+table th:last-child,
+table tr td:last-child {
+  border-right: none;
+}
+
+/* cantos arredondados no cabeçalho */
+table th:first-child {
+  border-top-left-radius: var(--table-radius);
+}
+table th:last-child {
+  border-top-right-radius: var(--table-radius);
+}
+
+/* cabeçalho destacado */
+table th {
+  background-color: var(--table-header-bg);
+  color: var(--table-header-text);
+  border-bottom-width: 0.25em;
+  text-align: left;
+}
+
+/* zebrado: linhas ímpares com fundo suave */
+table tr:nth-of-type(2n-1) {
+  background-color: var(--table-row-alt);
 }
 
 /* || SECTION CLASS: title */
@@ -158,4 +222,3 @@ section.tinytext>ul,
 section.tinytext>blockquote {
   font-size: 0.65em;
 }
-
