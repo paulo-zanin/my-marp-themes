@@ -98,17 +98,22 @@ mark {
 table {
   display: block !important;
   width: 100% !important;
-  min-width: 100% !important;      /* força ocupar largura total mesmo com max-content */
   max-width: 100% !important;
   overflow: auto !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  align-self: stretch !important;
   border-collapse: separate !important;
   border-spacing: 0 !important;
   border: 1px solid #c8e6c9 !important;
   border-radius: var(--table-radius) !important;
   box-sizing: border-box !important;
+}
+
+/* força thead e tbody a ocuparem 100% da largura da tabela */
+table thead,
+table tbody {
+  display: table !important;
+  width: 100% !important;
 }
 
 table th {
