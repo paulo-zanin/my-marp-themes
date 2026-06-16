@@ -22,8 +22,6 @@ section {
   background-size: 150% 1em;
   padding: 2em;
   padding-top: 3.2em;
-  /* rolagem horizontal da section quando tabela for larga */
-  overflow-x: auto;
 }
 
 section::before {
@@ -66,12 +64,7 @@ footer {
   color: white;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   color: #141414;
 }
 
@@ -97,19 +90,15 @@ mark {
   background-color: #f5db7e;
 }
 
-/* ── Tabelas ── */
+/* ── Tabelas ──
+   NÃO sobrescreve display/width/overflow — o tema default do Marp já cuida disso.
+   Apenas cores, bordas e cantos arredondados (técnica do neobeam).
+*/
 table {
-  /* largura total menos margens laterais */
-  width: 100%;
-  min-width: max-content; /* ativa rolagem na section quando necessário */
-  margin-left: auto;
-  margin-right: auto;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid #c8e6c9;
   border-radius: var(--table-radius);
-  /* garante que max-width do tema default não interfira */
-  max-width: 100% !important;
 }
 
 table th {
@@ -170,7 +159,7 @@ section::after {
 }
 
 .katex {
-  font: normal 1.05em KaTeX_Main, "Times New Roman", serif
+  font: normal 1.05em KaTeX_Main, "Times New Roman", serif;
 }
 
 img[alt~="center"] {
@@ -179,7 +168,7 @@ img[alt~="center"] {
 }
 
 /* || SECTION CLASS: title */
-section.title>h1 {
+section.title > h1 {
   font-family: "CMU Bright", "Segoe UI Semibold";
   color: #ffffff;
   background-color: var(--main);
@@ -195,15 +184,15 @@ section.title>h1 {
   height: auto;
 }
 
-section.title>p {
+section.title > p {
   position: relative;
   text-align: center;
   top: 35px;
 }
 
 /* || SECTION CLASS: tinytext */
-section.tinytext>p,
-section.tinytext>ul,
-section.tinytext>blockquote {
+section.tinytext > p,
+section.tinytext > ul,
+section.tinytext > blockquote {
   font-size: 0.65em;
 }
