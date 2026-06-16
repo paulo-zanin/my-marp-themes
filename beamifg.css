@@ -12,7 +12,13 @@
   --table-radius: 0.5em;
 }
 
+/* Portado do neobeam: display flex + overflow visible na section
+   permite que tabelas largas rolem em vez de serem cortadas */
 section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  overflow: visible !important;
   position: relative;
   background-color: #ffffff;
   background-image:
@@ -90,10 +96,10 @@ mark {
   background-color: #f5db7e;
 }
 
-/* ── Tabelas ── */
+/* ── Tabelas — portado do neobeam ── */
 table {
   display: block !important;
-  width: min(100%, max-content) !important;
+  width: max-content !important;
   max-width: 100% !important;
   overflow-x: auto !important;
   margin-left: auto !important;
