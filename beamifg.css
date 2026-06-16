@@ -91,10 +91,17 @@ mark {
 }
 
 /* ── Tabelas ──
-   NÃO sobrescreve display/width/overflow — o tema default do Marp já cuida disso.
-   Apenas cores, bordas e cantos arredondados (técnica do neobeam).
+   display: block + width: min(100%, max-content) + overflow: auto + margin: auto
+   resolve centralização, aproveitamento de espaço e rolagem simultaneamente.
+   min() garante: se o conteúdo cabe, ocupa tudo; se não cabe, rola.
 */
 table {
+  display: block;
+  width: min(100%, max-content);
+  max-width: 100%;
+  overflow-x: auto;
+  margin-left: auto;
+  margin-right: auto;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid #c8e6c9;
@@ -108,6 +115,7 @@ table th {
   text-align: left;
   border-bottom: 2px solid #388e3c;
   border-right: 1px solid #388e3c;
+  white-space: nowrap;
 }
 
 table th:first-child {
@@ -123,6 +131,7 @@ table td {
   padding: 0.35em 0.8em;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #eee;
+  white-space: nowrap;
 }
 
 table td:last-child {
