@@ -98,6 +98,7 @@ mark {
 table {
   display: block !important;
   width: 100% !important;
+  min-width: 100% !important;      /* força ocupar largura total mesmo com max-content */
   max-width: 100% !important;
   overflow: auto !important;
   margin-left: 0 !important;
@@ -154,7 +155,7 @@ table tr:nth-child(even) td {
   background-color: #f0f7f1 !important;
 }
 
-/* ── Imagens centralizadas — corrigido para flexbox ── */
+/* ── Imagens centralizadas ── */
 img[alt~="center"] {
   display: block !important;
   margin-left: auto !important;
