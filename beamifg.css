@@ -100,14 +100,15 @@ mark {
 }
 
 /* tabelas centralizadas, com margens laterais, respeitando h1 e rodapé */
+
 table {
-  display: table;
+  display: block;
   margin-left: auto;
   margin-right: auto;
   width: calc(100% - 1em);
   border-collapse: collapse;
+  overflow: auto;
 }
-
 table th {
   background-color: var(--main);
   color: #ffffff;
