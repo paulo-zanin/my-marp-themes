@@ -15,7 +15,7 @@
 section {
   display: flex !important;
   flex-direction: column !important;
-  align-items: flex-start !important;
+  align-items: stretch !important;   /* stretch para filhos ocuparem largura total */
   overflow: visible !important;
   position: relative;
   background-color: #ffffff;
@@ -95,15 +95,13 @@ mark {
 }
 
 /* ── Tabelas ── */
-
-/* wrapper: ocupa toda a largura disponível e corta overflow lateral */
-section > table {
+table {
   display: block !important;
-  width: 100% !important;
+  width: 100% !important;            /* ocupa toda a largura disponível */
   max-width: 100% !important;
-  overflow: hidden !important;       /* sem rolagem lateral */
-  margin-left: auto !important;
-  margin-right: auto !important;
+  overflow: hidden !important;       /* corta o que ultrapassar — sem scroll lateral */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   border-collapse: separate !important;
   border-spacing: 0 !important;
   border: 1px solid #c8e6c9 !important;
@@ -155,6 +153,14 @@ table tr:nth-child(even) td {
   background-color: #f0f7f1 !important;
 }
 
+/* ── Imagens centralizadas — corrigido para flexbox ── */
+img[alt~="center"] {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  align-self: center !important;
+}
+
 /* ── Paginação ── */
 section::after {
   font-size: 0.6em;
@@ -170,11 +176,6 @@ section::after {
 
 .katex {
   font: normal 1.05em KaTeX_Main, "Times New Roman", serif;
-}
-
-img[alt~="center"] {
-  display: block;
-  margin: 0 auto;
 }
 
 /* || SECTION CLASS: title */
