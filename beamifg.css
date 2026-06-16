@@ -34,6 +34,10 @@ section {
   background-position: center bottom;
   background-size: 150% 1em;
   padding: 2em;
+  /* Adicionado para melhor controle do layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 section::before {
@@ -109,6 +113,7 @@ section ul,
 section ol {
   text-align: justify;
 }
+
 code {
   background-color: rgba(100, 100, 100, 0.2);
 }
@@ -143,27 +148,31 @@ img[alt~="center"] {
   margin: 0 auto;
 }
 
-/* || TABELAS (portado do neobeamifg) */
-table {
+/* || TABELAS (MODIFICADO PARA CENTRALIZAR E OCUPAR ESPAÇO) */
+/* Container da tabela para controle de espaço */
+section table {
   color: var(--table-text);
   background-color: var(--table-bg);
   border: solid 0.1em var(--table-border-outer);
   border-radius: var(--table-radius);
-  border-spacing: 0;          /* remove o espaçamento padrão entre células */
+  border-spacing: 0;
   padding: 0;
-  width: fit-content;
-  max-width: 90%;
-  margin: 0.5em 0;
-  display: block;                   /* necessário p/ overflow funcionar em <table> */
+  width: 100%; /* OCUPA 100% DA LARGURA DISPONÍVEL */
+  max-width: 100%; /* SEM LIMITE DE 90% */
+  margin: 1em auto; /* CENTRALIZA + espaçamento vertical */
+  display: block;
   max-height: var(--table-max-height);
-  overflow: auto;                   /* permite deslizar quando a tabela é grande */
+  overflow: auto;
+  box-sizing: border-box; /* Evita que bordas aumentem a largura */
 }
 
+/* As células da tabela se ajustam */
 table tr td,
 table th {
   padding: calc(0.5 * var(--table-padding)) var(--table-padding);
   border-right: solid 0.1em var(--table-border-inner);
   border-bottom: solid 0.1em var(--table-border-inner);
+  text-align: left;
 }
 
 /* última linha sem borda inferior */
@@ -181,6 +190,7 @@ table tr td:last-child {
 table th:first-child {
   border-top-left-radius: var(--table-radius);
 }
+
 table th:last-child {
   border-top-right-radius: var(--table-radius);
 }
@@ -191,7 +201,7 @@ table th {
   color: var(--table-header-text);
   border-bottom-width: 0.25em;
   text-align: left;
-  position: sticky;   /* mantém o cabeçalho visível ao deslizar */
+  position: sticky;
   top: 0;
   z-index: 1;
 }
@@ -201,10 +211,22 @@ table tr:nth-of-type(2n-1) {
   background-color: var(--table-row-alt);
 }
 
+/* Ajuste fino do espaçamento entre título e tabela */
+section h1 + table,
+section h2 + table,
+section h3 + table {
+  margin-top: 0.5em;
+}
+
+/* Espaçamento antes do rodapé */
+section table:last-of-type {
+  margin-bottom: 2em;
+}
+
 /* || SECTION CLASS: title */
 /* title page - only to be used as for a single slide */
 /* <!-- _class: title --> */
-section.title>h1 {
+section.title > h1 {
   font-family: "CMU Bright", "Segoe UI Semibold";
   color: #ffffff;
   background-color: var(--main);
@@ -221,7 +243,7 @@ section.title>h1 {
 }
 
 /* remake this to be positioned with respect to h1 */
-section.title>p {
+section.title > p {
   position: relative;
   text-align: center;
   top: 35px;
@@ -230,8 +252,23 @@ section.title>p {
 /* || SECTION CLASS: tinytext */
 /* new class that makes p, ul, and blockquote text smaller */
 /* might be useful for the References slide, use <!-- _class: tinytext --> */
-section.tinytext>p,
-section.tinytext>ul,
-section.tinytext>blockquote {
+section.tinytext > p,
+section.tinytext > ul,
+section.tinytext > blockquote {
   font-size: 0.65em;
+}
+
+/* || SECTION CLASS: table-layout */
+/* Controle total do espaço vertical com Flexbox */
+section.table-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+section.table-layout table {
+  flex: 1;
+  margin: 1em auto;
+  width: 100%;
 }
