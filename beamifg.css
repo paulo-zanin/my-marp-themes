@@ -12,8 +12,6 @@
   --table-radius: 0.5em;
 }
 
-/* Portado do neobeam: display flex + overflow visible na section
-   permite que tabelas largas rolem em vez de serem cortadas */
 section {
   display: flex !important;
   flex-direction: column !important;
@@ -96,18 +94,21 @@ mark {
   background-color: #f5db7e;
 }
 
-/* ── Tabelas — portado do neobeam ── */
-table {
+/* ── Tabelas ── */
+
+/* wrapper: ocupa toda a largura disponível e corta overflow lateral */
+section > table {
   display: block !important;
-  width: max-content !important;
+  width: 100% !important;
   max-width: 100% !important;
-  overflow-x: auto !important;
+  overflow: hidden !important;       /* sem rolagem lateral */
   margin-left: auto !important;
   margin-right: auto !important;
   border-collapse: separate !important;
   border-spacing: 0 !important;
   border: 1px solid #c8e6c9 !important;
   border-radius: var(--table-radius) !important;
+  box-sizing: border-box !important;
 }
 
 table th {
@@ -117,7 +118,6 @@ table th {
   text-align: left !important;
   border-bottom: 2px solid #388e3c !important;
   border-right: 1px solid #388e3c !important;
-  white-space: nowrap !important;
 }
 
 table th:first-child {
@@ -133,7 +133,6 @@ table td {
   padding: 0.35em 0.8em !important;
   border-bottom: 1px solid #ddd !important;
   border-right: 1px solid #eee !important;
-  white-space: nowrap !important;
 }
 
 table td:last-child {
