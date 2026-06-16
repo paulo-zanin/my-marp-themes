@@ -11,33 +11,29 @@
   --secondary: #141414;
 
   /* === Variáveis de tabela (traduzidas do neobeamifg) === */
-  /* Valores fixos derivados do --main #4d9b59, p/ compatibilidade total */
-  --table-header-bg: #5fb06d;     /* cabeçalho: verde mais claro que o --main */
-  --table-header-text: #ffffff;   /* texto do cabeçalho */
-  --table-text: #141414;          /* texto das células */
-  --table-border-outer: #357a40;  /* borda externa: verde mais escuro */
-  --table-border-inner: #e0e0e0;  /* linhas divisórias internas */
-  --table-row-alt: #f1f7f2;       /* zebrado: verde quase branco */
-  --table-bg: #ffffff;            /* fundo do bloco da tabela */
-  --table-radius: 0.5em;          /* cantos arredondados */
-  --table-padding: 0.4em;         /* respiro interno */
-  --table-max-height: 70vh;       /* altura máx. antes de habilitar scroll */
+  --table-header-bg: #5fb06d;
+  --table-header-text: #ffffff;
+  --table-text: #141414;
+  --table-border-outer: #357a40;
+  --table-border-inner: #e0e0e0;
+  --table-row-alt: #f1f7f2;
+  --table-bg: #ffffff;
+  --table-radius: 0.5em;
+  --table-padding: 0.4em;
+  --table-max-height: 60vh;
 }
 
 section {
   position: relative;
   background-color: #ffffff;
-  /* bottom two-coloured bar in base64 svg */
   background-image:
     url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjUwbW0iIGhlaWdodD0iNS4zNTQ2bW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI1MCA1LjM1NDYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMC4zNDcgLTkxLjAyOCkiPgo8cmVjdCB4PSIyMC4zNDciIHk9IjkxLjAyOCIgd2lkdGg9IjEyNSIgaGVpZ2h0PSI1LjM1NDYiIGZpbGw9IiM0ZDliNTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIwIi8+CjxwYXRoIGQ9Im0xNDUuMzUgOTMuNzA1di0yLjY3NzNoMTI1djUuMzU0NmgtMTI1eiIgZmlsbD0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIwIi8+CjwvZz4KPC9zdmc+);
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: 150% 1em;
   padding: 2em;
-  /* Adicionado para melhor controle do layout */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  padding-top: 3.5em; /* Espaço reservado para o título absoluto */
+  min-height: 100vh;
 }
 
 section::before {
@@ -60,27 +56,26 @@ section::before {
 
 header {
   font-size: 0.6em;
-  /* this text-align is important */
   text-align: right;
-  /* I don't like this absolute positioning, but it works */
   position: absolute;
   top: 96.2%;
   width: 100%;
   right: 0;
   left: -51%;
   color: white;
+  z-index: 2;
 }
 
 footer {
   font-size: 0.6em;
   position: absolute;
-  /* this text-align is important */
   text-align: left;
   top: 96.2%;
   width: 100%;
   right: 0;
   left: 50.8%;
   color: white;
+  z-index: 2;
 }
 
 h1,
@@ -92,19 +87,25 @@ h6 {
   color: #141414;
 }
 
-/* only apply to the first occurrence of h1 */
+/* Título principal - ajustado para não interferir no fluxo */
 h1:nth-of-type(1) {
   font-family: "CMU Bright", "Segoe UI Semibold";
   color: #ffffff;
   background-color: var(--main);
-  border-top: 0.3em solid var(--main);
-  padding: 0;
+  padding: 0.3em 0 0.3em 0.5em;
   position: absolute;
   top: 0;
+  left: 0;
   right: 0;
   width: 100%;
-  height: 1.5em;
-  text-indent: 0.5em;
+  margin: 0;
+  z-index: 5;
+}
+
+/* Demais títulos (h2, h3) ficam no fluxo normal */
+h2, h3, h4, h5, h6 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 /* || ALINHAMENTO DO TEXTO (JUSTIFICADO) */
@@ -122,10 +123,9 @@ mark {
   background-color: #f5db7e;
 }
 
-/* formatting page numbers */
+/* formatação dos números de página */
 section::after {
   font-size: 0.6em;
-  /* https://github.com/yhatt/marp/issues/263 */
   content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
   position: absolute;
   text-align: right;
@@ -134,6 +134,7 @@ section::after {
   right: 0;
   left: -0.5em;
   color: white;
+  z-index: 2;
 }
 
 /* inline math was too large wrt text */
@@ -142,14 +143,22 @@ section::after {
 }
 
 /* the "center" keyword centers the image - may break, careful */
-/* https://github.com/marp-team/marpit/issues/141#issuecomment-473204518 */
 img[alt~="center"] {
   display: block;
   margin: 0 auto;
 }
 
-/* || TABELAS (MODIFICADO PARA CENTRALIZAR E OCUPAR ESPAÇO) */
-/* Container da tabela para controle de espaço */
+/* ============================================ */
+ /* TABELAS - TOTALMENTE REFORMULADAS */
+/* ============================================ */
+
+/* Container flexível para o conteúdo principal */
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* A tabela propriamente dita */
 section table {
   color: var(--table-text);
   background-color: var(--table-bg);
@@ -157,16 +166,59 @@ section table {
   border-radius: var(--table-radius);
   border-spacing: 0;
   padding: 0;
-  width: 100%; /* OCUPA 100% DA LARGURA DISPONÍVEL */
-  max-width: 100%; /* SEM LIMITE DE 90% */
-  margin: 1em auto; /* CENTRALIZA + espaçamento vertical */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   display: block;
   max-height: var(--table-max-height);
   overflow: auto;
-  box-sizing: border-box; /* Evita que bordas aumentem a largura */
+  box-sizing: border-box;
 }
 
-/* As células da tabela se ajustam */
+/* Layout para slides COM tabela - centralização vertical */
+section:has(table) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  min-height: 100vh;
+}
+
+/* Ajuste para quando houver título + tabela */
+section:has(h1:nth-of-type(1)):has(table) {
+  justify-content: flex-start; /* Não centraliza se tem título */
+}
+
+section:has(h1:nth-of-type(1)):has(table) .table-wrapper {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Wrapper para conteúdo que não seja título/header/footer */
+.table-wrapper,
+section > :not(h1:nth-of-type(1)):not(header):not(footer):not(style) {
+  flex-shrink: 0;
+}
+
+/* Container especial para tabelas */
+section table {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Centralização do conteúdo da tabela quando ela é o elemento principal */
+section:has(table):not(:has(h1:nth-of-type(1))) {
+  justify-content: center;
+  align-items: center;
+}
+
+section:has(table):not(:has(h1:nth-of-type(1))) table {
+  margin: auto 0;
+}
+
+/* Estilo das células */
 table tr td,
 table th {
   padding: calc(0.5 * var(--table-padding)) var(--table-padding);
@@ -190,7 +242,6 @@ table tr td:last-child {
 table th:first-child {
   border-top-left-radius: var(--table-radius);
 }
-
 table th:last-child {
   border-top-right-radius: var(--table-radius);
 }
@@ -211,21 +262,17 @@ table tr:nth-of-type(2n-1) {
   background-color: var(--table-row-alt);
 }
 
-/* Ajuste fino do espaçamento entre título e tabela */
-section h1 + table,
-section h2 + table,
-section h3 + table {
-  margin-top: 0.5em;
+/* Ajuste para slides APENAS com tabela (sem título) */
+section:not(:has(h1)) table {
+  margin: auto;
+  width: 90%;
 }
 
-/* Espaçamento antes do rodapé */
-section table:last-of-type {
-  margin-bottom: 2em;
-}
+/* ============================================ */
+ /* CLASSES ESPECIAIS */
+/* ============================================ */
 
 /* || SECTION CLASS: title */
-/* title page - only to be used as for a single slide */
-/* <!-- _class: title --> */
 section.title > h1 {
   font-family: "CMU Bright", "Segoe UI Semibold";
   color: #ffffff;
@@ -240,9 +287,9 @@ section.title > h1 {
   width: 80%;
   padding-bottom: 0.2em;
   height: auto;
+  position: absolute;
 }
 
-/* remake this to be positioned with respect to h1 */
 section.title > p {
   position: relative;
   text-align: center;
@@ -250,25 +297,28 @@ section.title > p {
 }
 
 /* || SECTION CLASS: tinytext */
-/* new class that makes p, ul, and blockquote text smaller */
-/* might be useful for the References slide, use <!-- _class: tinytext --> */
 section.tinytext > p,
 section.tinytext > ul,
 section.tinytext > blockquote {
   font-size: 0.65em;
 }
 
-/* || SECTION CLASS: table-layout */
-/* Controle total do espaço vertical com Flexbox */
-section.table-layout {
+/* || SECTION CLASS: table-center */
+/* Força centralização vertical E horizontal da tabela */
+section.table-center {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
-section.table-layout table {
-  flex: 1;
-  margin: 1em auto;
-  width: 100%;
+section.table-center table {
+  width: 90%;
+  margin: auto;
+}
+
+/* || SECTION CLASS: no-title-margin */
+/* Remove o padding-top extra quando não há título */
+section.no-title-margin {
+  padding-top: 2em;
 }
