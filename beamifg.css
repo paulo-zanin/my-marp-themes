@@ -9,6 +9,7 @@
   font-family: "CMU Sans Serif", "Segoe UI", Helvetica, sans-serif;
   --main: #4d9b59;
   --secondary: #141414;
+  --table-radius: 0.5em;
 }
 
 section {
@@ -21,7 +22,7 @@ section {
   background-position: center bottom;
   background-size: 150% 1em;
   padding: 2em;
-  padding-top: 3.2em; /* aumentado para dar espaço abaixo da faixa do h1 */
+  padding-top: 3.2em; /* espaço abaixo da faixa do h1 */
 }
 
 section::before {
@@ -44,9 +45,7 @@ section::before {
 
 header {
   font-size: 0.6em;
-  /* this text-align is important */
   text-align: right;
-  /* I don't like this absolute positioning, but it works */
   position: absolute;
   top: 96.2%;
   width: 100%;
@@ -58,7 +57,6 @@ header {
 footer {
   font-size: 0.6em;
   position: absolute;
-  /* this text-align is important */
   text-align: left;
   top: 96.2%;
   width: 100%;
@@ -99,36 +97,66 @@ mark {
   background-color: #f5db7e;
 }
 
-/* tabelas centralizadas, com margens laterais, respeitando h1 e rodapé */
-
+/* ── Tabelas ── */
 table {
-  display: block;
+  display: block;              /* permite overflow horizontal */
+  overflow-x: auto;            /* rolagem quando necessário */
+  width: calc(100% - 1em);
   margin-left: auto;
   margin-right: auto;
-  width: calc(100% - 1em);
-  border-collapse: collapse;
-  overflow: auto;
+  border-collapse: separate;   /* necessário para border-radius funcionar */
+  border-spacing: 0;
+  border: 1px solid #c8e6c9;
+  border-radius: var(--table-radius);
 }
+
 table th {
   background-color: var(--main);
   color: #ffffff;
   padding: 0.4em 0.8em;
   text-align: left;
+  border-bottom: 2px solid #388e3c;
+  border-right: 1px solid #388e3c;
+}
+
+table th:last-child {
+  border-right: none;
+  border-top-right-radius: var(--table-radius);
+}
+
+table th:first-child {
+  border-top-left-radius: var(--table-radius);
 }
 
 table td {
   padding: 0.35em 0.8em;
   border-bottom: 1px solid #ddd;
+  border-right: 1px solid #eee;
+}
+
+table td:last-child {
+  border-right: none;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: var(--table-radius);
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: var(--table-radius);
 }
 
 table tr:nth-child(even) td {
   background-color: #f0f7f1;
 }
 
-/* formatting page numbers  */
+/* formatting page numbers */
 section::after {
   font-size: 0.6em;
-  /* https://github.com/yhatt/marp/issues/licenses263 */
   content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
   position: absolute;
   text-align: right;
@@ -144,16 +172,12 @@ section::after {
   font: normal 1.05em KaTeX_Main, "Times New Roman", serif
 }
 
-/* the "center" keyword centers the image - may break, careful */
-/* https://github.com/marp-team/marpit/issues/141#issuecomment-473204518 */
 img[alt~="center"] {
   display: block;
   margin: 0 auto;
 }
 
 /* || SECTION CLASS: title */
-/* title page - only to be used as for a single slide */
-/* <!-- _class: title --> */
 section.title>h1 {
   font-family: "CMU Bright", "Segoe UI Semibold";
   color: #ffffff;
@@ -170,7 +194,6 @@ section.title>h1 {
   height: auto;
 }
 
-/* remake this to be positioned with respect to h1 */
 section.title>p {
   position: relative;
   text-align: center;
@@ -178,8 +201,6 @@ section.title>p {
 }
 
 /* || SECTION CLASS: tinytext */
-/* new class that makes p, ul, and blockquote text smaller */
-/* might be useful for the References slide, use <!-- _class: tinytext --> */
 section.tinytext>p,
 section.tinytext>ul,
 section.tinytext>blockquote {
