@@ -9,19 +9,6 @@
   font-family: "CMU Sans Serif", "Segoe UI", Helvetica, sans-serif;
   --main: #4d9b59;
   --secondary: #141414;
-
-  /* === Variáveis de tabela (traduzidas do neobeamifg) === */
-  /* Valores fixos derivados do --main #4d9b59, p/ compatibilidade total */
-  --table-header-bg: #5fb06d;     /* cabeçalho: verde mais claro que o --main */
-  --table-header-text: #ffffff;   /* texto do cabeçalho */
-  --table-text: #141414;          /* texto das células */
-  --table-border-outer: #357a40;  /* borda externa: verde mais escuro */
-  --table-border-inner: #e0e0e0;  /* linhas divisórias internas */
-  --table-row-alt: #f1f7f2;       /* zebrado: verde quase branco */
-  --table-bg: #ffffff;            /* fundo do bloco da tabela */
-  --table-radius: 0.5em;          /* cantos arredondados */
-  --table-padding: 0.4em;         /* respiro interno */
-  --table-max-height: 70vh;       /* altura máx. antes de habilitar scroll */
 }
 
 section {
@@ -34,6 +21,7 @@ section {
   background-position: center bottom;
   background-size: 150% 1em;
   padding: 2em;
+  padding-top: 3.2em; /* aumentado para dar espaço abaixo da faixa do h1 */
 }
 
 section::before {
@@ -103,12 +91,6 @@ h1:nth-of-type(1) {
   text-indent: 0.5em;
 }
 
-/* || ALINHAMENTO DO TEXTO (JUSTIFICADO) */
-section p,
-section ul,
-section ol {
-  text-align: justify;
-}
 code {
   background-color: rgba(100, 100, 100, 0.2);
 }
@@ -117,10 +99,35 @@ mark {
   background-color: #f5db7e;
 }
 
-/* formatting page numbers */
+/* tabelas centralizadas, com margens laterais, respeitando h1 e rodapé */
+table {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - 1em);
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: var(--main);
+  color: #ffffff;
+  padding: 0.4em 0.8em;
+  text-align: left;
+}
+
+table td {
+  padding: 0.35em 0.8em;
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:nth-child(even) td {
+  background-color: #f0f7f1;
+}
+
+/* formatting page numbers  */
 section::after {
   font-size: 0.6em;
-  /* https://github.com/yhatt/marp/issues/263 */
+  /* https://github.com/yhatt/marp/issues/licenses263 */
   content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
   position: absolute;
   text-align: right;
@@ -141,64 +148,6 @@ section::after {
 img[alt~="center"] {
   display: block;
   margin: 0 auto;
-}
-
-/* || TABELAS (portado do neobeamifg) */
-table {
-  color: var(--table-text);
-  background-color: var(--table-bg);
-  border: solid 0.1em var(--table-border-outer);
-  border-radius: var(--table-radius);
-  border-spacing: 0;          /* remove o espaçamento padrão entre células */
-  padding: 0;
-  width: fit-content;
-  max-width: 90%;
-  margin: 0.5em 0;
-  display: block;                   /* necessário p/ overflow funcionar em tabela */
-  max-height: var(--table-max-height);
-  overflow: auto;                   /* permite deslizar quando a tabela é grande */
-}
-
-table tr td,
-table th {
-  padding: calc(0.5 * var(--table-padding)) var(--table-padding);
-  border-right: solid 0.1em var(--table-border-inner);
-  border-bottom: solid 0.1em var(--table-border-inner);
-}
-
-/* última linha sem borda inferior */
-table tr:last-child td {
-  border-bottom: none;
-}
-
-/* última coluna sem borda à direita */
-table th:last-child,
-table tr td:last-child {
-  border-right: none;
-}
-
-/* cantos arredondados no cabeçalho */
-table th:first-child {
-  border-top-left-radius: var(--table-radius);
-}
-table th:last-child {
-  border-top-right-radius: var(--table-radius);
-}
-
-/* cabeçalho destacado */
-table th {
-  background-color: var(--table-header-bg);
-  color: var(--table-header-text);
-  border-bottom-width: 0.25em;
-  text-align: left;
-  position: sticky;   /* mantém o cabeçalho visível ao deslizar */
-  top: 0;
-  z-index: 1;
-}
-
-/* zebrado: linhas ímpares com fundo suave */
-table tr:nth-of-type(2n-1) {
-  background-color: var(--table-row-alt);
 }
 
 /* || SECTION CLASS: title */
