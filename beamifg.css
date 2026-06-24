@@ -96,68 +96,84 @@ mark {
 
 /* ── Tabelas ── */
 table {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow: auto !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  border-collapse: separate !important;
-  border-spacing: 0 !important;
-  border: 1px solid #c8e6c9 !important;
-  border-radius: var(--table-radius) !important;
-  box-sizing: border-box !important;
+ display: block !important;
+ width: 100% !important;
+ max-width: 100% !important;
+ overflow: auto !important;
+ margin-left: 0 !important;
+ margin-right: 0 !important;
+ border-collapse: separate !important;
+ border-spacing: 0 !important;
+ border: 1px solid #c8e6c9 !important;
+ border-radius: var(--table-radius) !important;
+ box-sizing: border-box !important;
+ table-layout: fixed !important; /* ADICIONAR: garante largura uniforme das colunas */
 }
 
 /* força thead e tbody a ocuparem 100% da largura da tabela */
 table thead,
 table tbody {
-  display: table !important;
-  width: 100% !important;
+ display: table !important;
+ width: 100% !important;
+ table-layout: fixed !important; /* ADICIONAR: mantém consistência */
 }
 
 table th {
-  background-color: var(--main) !important;
-  color: #ffffff !important;
-  padding: 0.4em 0.8em !important;
-  text-align: left !important;
-  border-bottom: 2px solid #388e3c !important;
-  border-right: 1px solid #388e3c !important;
+ background-color: var(--main) !important;
+ color: #ffffff !important;
+ padding: 0.4em 0.8em !important;
+ text-align: left !important;
+ border-bottom: 2px solid #388e3c !important;
+ border-right: 1px solid #388e3c !important;
+ word-wrap: break-word !important; /* ADICIONAR: quebra palavras longas */
+ overflow-wrap: break-word !important; /* ADICIONAR */
+ vertical-align: middle !important; /* ADICIONAR: alinha verticalmente */
 }
 
 table th:first-child {
-  border-top-left-radius: var(--table-radius) !important;
+ border-top-left-radius: var(--table-radius) !important;
 }
 
 table th:last-child {
-  border-right: none !important;
-  border-top-right-radius: var(--table-radius) !important;
+ border-right: none !important;
+ border-top-right-radius: var(--table-radius) !important;
 }
 
 table td {
-  padding: 0.35em 0.8em !important;
-  border-bottom: 1px solid #ddd !important;
-  border-right: 1px solid #eee !important;
+ padding: 0.35em 0.8em !important;
+ border-bottom: 1px solid #ddd !important;
+ border-right: 1px solid #eee !important;
+ word-wrap: break-word !important; /* ADICIONAR: quebra palavras longas */
+ overflow-wrap: break-word !important; /* ADICIONAR */
+ vertical-align: middle !important; /* ADICIONAR: alinha verticalmente */
+ white-space: normal !important; /* ADICIONAR: permite quebra de linha */
 }
 
 table td:last-child {
-  border-right: none !important;
+ border-right: none !important;
 }
 
 table tr:last-child td {
-  border-bottom: none !important;
+ border-bottom: none !important;
 }
 
 table tr:last-child td:first-child {
-  border-bottom-left-radius: var(--table-radius) !important;
+ border-bottom-left-radius: var(--table-radius) !important;
 }
 
 table tr:last-child td:last-child {
-  border-bottom-right-radius: var(--table-radius) !important;
+ border-bottom-right-radius: var(--table-radius) !important;
 }
 
 table tr:nth-child(even) td {
-  background-color: #f0f7f1 !important;
+ background-color: #f0f7f1 !important;
+}
+
+/* ADICIONAR: Garante que o conteúdo das células não ultrapasse a largura */
+table th,
+table td {
+ box-sizing: border-box !important;
+ max-width: 100% !important;
 }
 
 /* ── Imagens centralizadas ── */
