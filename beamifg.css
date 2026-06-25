@@ -95,33 +95,57 @@ mark {
 }
 
 /* ── Tabelas ── */
-/* ── Container dos slides - controla overflow ── */
+/* ── Tabelas: centralizadas, sem rolagem horizontal, com rolagem vertical ── */
+
+/* Remove a rolagem do slide inteiro para que a rolagem seja apenas na tabela */
 .remark-slide-content {
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
+  overflow: hidden !important;
 }
 
-/* ── Tabelas ── */
+/* Container flex para centralizar a tabela horizontalmente */
+section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* A tabela em si */
 table {
   display: table !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 1em 0 !important;
+  width: fit-content !important;
+  max-width: 90% !important;
+  min-width: 40% !important;
+  margin: 1em auto !important;
   border-collapse: collapse !important;
-  border: 1px solid #c8e6c9 !important;
-  border-radius: var(--table-radius) !important;
   table-layout: fixed !important;
-  overflow: hidden !important;
+  box-sizing: border-box !important;
+
+  /* Rolagem vertical quando a tabela for muito alta */
+  max-height: 75vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  display: block !important;
+
+  /* Estilos visuais */
+  border: 1px solid #c8e6c9 !important;
+  border-radius: var(--table-radius, 8px) !important;
+}
+
+/* Restaura o display de table para o interior (thead, tbody, tr, th, td) */
+table thead,
+table tbody,
+table tfoot {
+  display: table !important;
+  width: 100% !important;
 }
 
 table thead {
   display: table-header-group !important;
-  width: 100% !important;
 }
 
 table tbody {
   display: table-row-group !important;
-  width: 100% !important;
 }
 
 table tr {
@@ -129,20 +153,34 @@ table tr {
   width: 100% !important;
 }
 
-table th {
+table th,
+table td {
   display: table-cell !important;
-  background-color: var(--main) !important;
+  padding: 0.5em 0.6em !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  line-height: 1.4 !important;
+  font-size: 0.85em !important;
+}
+
+/* Cabeçalho fixo durante a rolagem */
+table thead {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+}
+
+table th {
+  background-color: var(--main, #2e7d32) !important;
   color: #ffffff !important;
-  padding: 0.6em 0.5em !important;
+  font-weight: bold !important;
   text-align: left !important;
   border-bottom: 2px solid #388e3c !important;
   border-right: 1px solid rgba(255, 255, 255, 0.3) !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  vertical-align: middle !important;
-  font-weight: bold !important;
-  font-size: 0.9em !important;
-  line-height: 1.3 !important;
 }
 
 table th:last-child {
@@ -150,16 +188,8 @@ table th:last-child {
 }
 
 table td {
-  display: table-cell !important;
-  padding: 0.5em 0.5em !important;
   border-bottom: 1px solid #e0e0e0 !important;
   border-right: 1px solid #f5f5f5 !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  vertical-align: middle !important;
-  white-space: normal !important;
-  line-height: 1.4 !important;
-  font-size: 0.85em !important;
 }
 
 table td:last-child {
@@ -171,31 +201,43 @@ table tr:last-child td {
 }
 
 table tr:last-child td:first-child {
-  border-bottom-left-radius: var(--table-radius) !important;
+  border-bottom-left-radius: var(--table-radius, 8px) !important;
 }
 
 table tr:last-child td:last-child {
-  border-bottom-right-radius: var(--table-radius) !important;
+  border-bottom-right-radius: var(--table-radius, 8px) !important;
 }
 
 table tr:nth-child(even) td {
   background-color: #f0f7f1 !important;
 }
 
-/* Ajuste para fórmulas matemáticas dentro de tabelas */
+/* Scrollbar estilizada para a tabela */
+table::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+table::-webkit-scrollbar-track {
+  background: #f0f7f1 !important;
+  border-radius: 3px !important;
+}
+
+table::-webkit-scrollbar-thumb {
+  background: #388e3c !important;
+  border-radius: 3px !important;
+}
+
+table::-webkit-scrollbar-thumb:hover {
+  background: #2e7d32 !important;
+}
+
+/* Fórmulas matemáticas dentro de tabelas */
 table td mjx-container,
 table th mjx-container {
   font-size: 0.9em !important;
   max-width: 100% !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
-}
-
-/* Garante que o conteúdo não ultrapasse */
-table th,
-table td {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
 }
 
 /* ── Imagens centralizadas ── */
